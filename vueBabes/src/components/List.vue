@@ -17,8 +17,7 @@
         ,data: function () {
             // console.log(this.$route.params.filter) ;
             return {
-                newTodo: this.orgValue
-                ,editingTodo: null
+                editingTodo: null
                 ,editingTodoTitle: ''
             } ;
         }

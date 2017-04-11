@@ -1,28 +1,34 @@
 <template>
-<footer>
-    <a href="#/all">All</a>
-    <a href="#/active">Active</a>
-    <a href="#/completed">Completed</a>
-</footer>
+<div class="">
+    <div class="content-block">
+        <p class="buttons-row" @click="change">
+            <span class="button" :class="{active: filter == 'all'}" data-filter="all">All</span>
+            <span class="button" :class="{active: filter == 'active'}" data-filter="active">Active</span>
+            <span class="button" :class="{active: filter == 'completed'}" data-filter="completed">Completed</span>
+        </p>
+    </div>
+</div>
 </template>
 
 <script>
     export default {
         data: function () {
             return {
-                newTodo: this.orgValue
+                filter: 'all'
             } ;
         }
         ,methods: {
-            submit: function () {
-                this.newTodo && this.$emit('child-submit', this.newTodo)
-                this.newTodo = ''
+            change: function (e) {
+                //todo donot use DOMAPI
+                this.filter = $(e.target).data('filter') || 'all'
+                this.Zeus.$emit('foot-filter', this.filter)
             }
         }
     }
 </script>
 
 <style scoped>
-footer a {padding:0px 10px;color:#39f;text-decoration:none;}
+footer {text-align:center;padding-top:10px;}
+footer span {padding:0px 10px;color:#39f;text-decoration:none;}
 
 </style>
