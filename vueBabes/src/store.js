@@ -6,12 +6,11 @@ var config = { syncURL: "https://bkmk.wilddogio.com/"};
 wilddog.initializeApp(config);
 const Ref = wilddog.sync().ref();
 
+let cate = 'todo'
 
 export default {
     fetch: function (cb) {
-
-
-        Ref.child('todo').on("value", function (data, error) {
+        Ref.child(cate).on("value", function (data, error) {
             var ret = []
             if (error == null) {
                 var D = data.val()
@@ -24,8 +23,22 @@ export default {
         });
         // return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     },
+    push: function (data) {
+        Ref.child(cate).push({
+            "name": data,
+            "completed": false
+        });
+    },
+    remove: function (id) {
+        Ref.child(cate).child(id).remove()
+    },
+    update: function (id, key, value) {
+        let obj = {}
+        obj[key] = value
+        // console.log('store update',id, obj);
+        Ref.child(cate).child(id).update(obj)
+    },
     save: function (todos) {
-              console.log('to save', todos) ;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+        // localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
     }
 }

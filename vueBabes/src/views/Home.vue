@@ -2,7 +2,7 @@
 <div class="">
     <Top @child-submit="submit" :org-value="orgValue"></Top>
 
-    <List @child-remove="remove" :todo-list="filterList"></List>
+    <List @child-remove="remove" @child-update="update" :todo-list="filterList"></List>
     <Foot></Foot>
 </div>
 </template>
@@ -31,10 +31,10 @@ export default {
         }
     }
     ,watch: {
-        todoList: {
-            deep: true
-            ,handler: Store.save
-        }
+        // todoList: {
+            // deep: true
+            // ,handler: Store.save
+        // }
     }
     ,created(){
         Store.fetch((v)=>{
@@ -49,12 +49,15 @@ export default {
     }
     ,methods: {
         submit: function (data) {
-            console.log('parent should submit', data) ;
-            this.todoList.push({ title: data, completed: false})
+            Store.push(data)
+            // this.todoList.push({ title: data, completed: false})
         }
-        ,remove: function (data) {
-            console.log('parent remove', data) ;
-            this.todoList.splice(this.todoList.indexOf(data),1)
+        ,remove: function (id) {
+            Store.remove(id)
+            // this.todoList.splice(this.todoList.indexOf(data),1)
+        }
+        ,update: function (id, key, value) {
+            Store.update(id, key, value)
         }
         ,filterData: function (type) {
             var ret ;

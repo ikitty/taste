@@ -4,7 +4,7 @@
         <div class="view">
             <label><input type="checkbox" @click="toggleComplete(item)" :checked="item.completed" value=""/></label>
             <p @dblclick="editTodo(item)">{{item.name}}</p>
-            <span @click="remove(item)" class="btn_del">X</span>
+            <span @click="remove(item.id)" class="btn_del">X</span>
         </div>
         <input class="edit" type="text" v-todo-focus="item == editingTodo" v-model="editingTodoTitle" @keyup.enter="doneEdit(item)" @blur="cancelEdit" autocomplete="off"/>
     </li>
@@ -28,28 +28,30 @@
             ,test: function () {
 
             }
-            ,toggleComplete: function (todo) {
-                todo.completed = !todo.completed
+            ,toggleComplete: function (item) {
+                this.$emit('child-update', item.id, 'completed', !item.completed)
+                // todo.completed = !todo.completed
             }
             ,remove: function (data) {
                 this.$emit('child-remove', data)
             }
             ,editTodo: function (todo) {
-                this.editingTodoTitle = todo.title
+                this.editingTodoTitle = todo.name
                 this.editingTodo = todo
             }
             ,cancelEdit: function () {
                 this.editingTodoTitle = ''
                 this.editingTodo = null
             }
-            ,doneEdit: function (todo) {
+            ,doneEdit: function (item) {
                 let t = this.editingTodoTitle.trim()
                 if (!t) {
-                    this.remove(todo)
+                    this.remove(item.id)
                     return  ;
                 }
 
-                todo.title = t
+                this.$emit('child-update', item.id, 'name', t)
+                // item.title = t
                 this.editingTodoTitle = ''
                 this.editingTodo = null
             }
