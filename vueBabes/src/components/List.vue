@@ -3,7 +3,7 @@
     <li v-for="(item,i) in todoList" :class="{editing: item == editingTodo}">
         <div class="view">
             <label><input type="checkbox" @click="toggleComplete(item)" :checked="item.completed" value=""/></label>
-            <p @dblclick="editTodo(item)">{{item.title}}</p>
+            <p @dblclick="editTodo(item)">{{item.name}}</p>
             <span @click="remove(item)" class="btn_del">X</span>
         </div>
         <input class="edit" type="text" v-todo-focus="item == editingTodo" v-model="editingTodoTitle" @keyup.enter="doneEdit(item)" @blur="cancelEdit" autocomplete="off"/>

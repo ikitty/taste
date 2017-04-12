@@ -8,7 +8,9 @@ const Ref = wilddog.sync().ref();
 
 
 export default {
-    fetch: function () {
+    fetch: function (cb) {
+
+
         Ref.child('todo').on("value", function (data, error) {
             var ret = []
             if (error == null) {
@@ -18,10 +20,12 @@ export default {
                     return  D[v] ;
                 })
             }
+            cb(ret)
         });
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        // return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     },
     save: function (todos) {
+              console.log('to save', todos) ;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
     }
 }
