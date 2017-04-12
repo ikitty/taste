@@ -17,8 +17,8 @@ import Foot from '../components/Foot'
 export default {
     data: function () {
         return {
-            orgValue:'add sth',
-            todoList: Store.fetch(),
+            orgValue:'',
+            todoList: [],
             filter: 'all'
         } ;   
     }
@@ -35,6 +35,11 @@ export default {
             deep: true
             ,handler: Store.save
         }
+    }
+    ,created(){
+        Store.fetch((v)=>{
+            this.todoList = v
+        })
     }
     ,mounted(){
         var self = this

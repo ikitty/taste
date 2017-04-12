@@ -16,16 +16,12 @@
 import Bar from './components/Bar'
 import BarItem from './components/BarItem'
 
-import Store from './store'
-
 
 export default {
     name: 'app',
     data: function () {
         return {
-            orgValue: 'defaultValue'
-            ,todoList: Store.fetch()
-            ,isIndex: 1
+            isIndex: 1
         } ;   
     }
     ,created(){
@@ -34,49 +30,8 @@ export default {
     ,mounted(){
         // console.log('mounted') ;
     }
-    ,computed: {
-        filterList: function () {
-            var filter = this.$route.params.filter || 'all'
-            console.log(filter) ;
-            return this.filterData(filter) ;
-        }
-    }
-    ,watch: {
-        todoList: {
-            deep: true
-            ,handler: Store.save
-        }
-    }
     ,components: {
         Bar, BarItem
-    }
-    ,methods: {
-        submit: function (data) {
-            console.log('parent should submit', data) ;
-            this.todoList.push({ title: data, completed: false})
-        }
-        ,remove: function (data) {
-            console.log('parent remove', data) ;
-            this.todoList.splice(this.todoList.indexOf(data),1)
-        }
-        ,filterData: function (type) {
-            var ret ;
-            switch(type) {
-                case 'all':
-                    ret = this.todoList 
-                    break;
-                case 'active':
-                    ret = this.todoList.filter((k) => !k.completed)
-                    break;
-                case 'completed':
-                    ret = this.todoList.filter((k) => !!k.completed)
-                    break;
-                
-                default:
-                    ret = this.todoList 
-            }
-            return ret ;
-        }
     }
 }
 </script>
