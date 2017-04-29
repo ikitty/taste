@@ -67,7 +67,7 @@
 </script>
 
 <style scoped>
-ul {width:500px;margin:0 auto;padding-top:30px;text-align:left;list-style:none}
+ul {width:500px;margin:0 auto;text-align:left;list-style:none}
 li {padding:10px 0px;line-height:30px;}
 li label {float:left;cursor:pointer;}
 li label input {cursor:pointer;margin-right:10px;}

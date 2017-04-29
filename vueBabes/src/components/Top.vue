@@ -1,10 +1,14 @@
 <template>
 <header>
-<h1 class="" @click="say" :msg="newTodo">welcome </h1>
     <input type="text" value="" @keyup.enter="submit" v-model="newTodo" autocomplete="off"/>
 </header>
 </template>
 
+<style scoped>
+    header {padding:20px;}
+    input {width:100%;height:35px;border:1px solid #ccc;padding:0 5px;} 
+    input:focus {border-color:#39f;}
+</style>
 <script>
     export default {
         props: ['orgValue']
@@ -21,10 +25,7 @@
             }
         }
         ,methods: {
-            say: function () {
-                console.log('hi') ;
-            }
-            ,submit: function () {
+            submit: function () {
                 this.newTodo && this.$emit('child-submit', this.newTodo)
                 this.newTodo = ''
             }

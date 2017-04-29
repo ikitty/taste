@@ -28,7 +28,9 @@ export default {
         // console.log('creat') ;
     }
     ,mounted(){
-        // console.log('mounted') ;
+        this.Zeus.$on('changeIndex', (v)=>{
+            this.isIndex = v
+        })
     }
     ,components: {
         Bar, BarItem

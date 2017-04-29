@@ -9,7 +9,10 @@
         </div>
         <div class="card-footer">
             <span class="">2017-04-03</span>
-            <a href="#" target="_blank">更多</a>
+
+            <router-link :to="{path: 'more'}" >
+                更多
+            </router-link>
         </div>
     </div>
 </div>
